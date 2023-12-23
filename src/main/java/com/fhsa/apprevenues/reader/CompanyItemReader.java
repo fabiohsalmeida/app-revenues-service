@@ -1,6 +1,7 @@
 package com.fhsa.apprevenues.reader;
 
 import com.fhsa.apprevenues.domain.item.CompanyItem;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
@@ -16,17 +17,17 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class CompanyItemReader {
 
-
     @Value("classpath:input/app-companies.csv")
     private Resource input;
 
     @Bean
+    @StepScope
     public FlatFileItemReader<CompanyItem> flatFileItemReader(
             LineMapper<CompanyItem> lineMapper
     ) {
         FlatFileItemReader<CompanyItem> companyFileReader = new FlatFileItemReader<>();
 
-        companyFileReader.setName("DEVAL");
+        companyFileReader.setName("companyItemReader");
         companyFileReader.setLinesToSkip(1);
         companyFileReader.setResource(input);
         companyFileReader.setLineMapper(lineMapper);

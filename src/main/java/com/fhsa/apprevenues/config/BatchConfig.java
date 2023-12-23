@@ -30,23 +30,23 @@ public class BatchConfig {
     private final DataSource dataSource;
 
     @Bean
-    public Job processAppCompanies(Step step1, JobRepository jobRepository) {
+    public Job processAppCompanies(Step processNewCompanies, JobRepository jobRepository) {
         String jobName = "Process App Companies";
 
         return new JobBuilder(jobName, jobRepository)
-                .start(step1)
+                .start(processNewCompanies)
                 .build();
     }
 
     @Bean
-    public Step step1(
+    public Step processNewCompanies(
         ItemReader<CompanyItem> reader,
         ItemProcessor<CompanyItem, CompanyEntity> processor,
         ItemWriter<CompanyEntity> writer,
         PlatformTransactionManager transactionManager,
         JobRepository jobRepository
     ) {
-        String name = "Do what you have to do";
+        String name = "Read from CSV and check if there's new companies to be processed";
 
         return new StepBuilder(name, jobRepository).<CompanyItem, CompanyEntity>
                 chunk(completionPolicy(), batchTransactionManager())
@@ -54,7 +54,7 @@ public class BatchConfig {
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
-//                .faultTolerant()
+                .faultTolerant()
                 .build();
     }
 
@@ -79,24 +79,4 @@ public class BatchConfig {
 
         return transactionManager;
     }
-
-
-//    @Bean
-//    public Job job(JobRepository jobRepository, Step step) {
-//        return new JobBuilder("job", jobRepository)
-//            .start(step)
-//            .build();
-//    }
-//
-//    @Bean
-//    public Step step(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-//        return new StepBuilder("step", jobRepository)
-//            .tasklet((StepContribution contribution, ChunkContext chunkContext) -> {
-//                System.out.println("Hello world");
-//
-//                return RepeatStatus.FINISHED;
-//            }, transactionManager)
-//            .build();
-//    }
-
 }
