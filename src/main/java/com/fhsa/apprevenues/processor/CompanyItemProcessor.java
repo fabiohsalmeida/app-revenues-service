@@ -14,7 +14,7 @@ import static com.fhsa.apprevenues.util.ConstantMessages.ERROR_DIFFERENT_COMPANY
 @RequiredArgsConstructor
 public class CompanyItemProcessor implements ItemProcessor<CompanyItem, CompanyEntity> {
 
-    private final CompanyRepository repository;
+    private final CompanyRepository companyRepository;
 
     @Override
     @SneakyThrows
@@ -27,7 +27,7 @@ public class CompanyItemProcessor implements ItemProcessor<CompanyItem, CompanyE
     }
 
     private boolean isItemIdAlreadyInUse(CompanyItem item) {
-        Optional<CompanyEntity> entity = repository.findById(item.getId());
+        Optional<CompanyEntity> entity = companyRepository.findById(item.getId());
 
         return entity.isPresent() ? checkIfDifferentRegisterExists(item, entity.get()) : false;
     }

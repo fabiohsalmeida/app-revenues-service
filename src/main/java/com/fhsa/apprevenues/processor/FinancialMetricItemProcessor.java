@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetricItem, FinancialMetricEntity> {
 
-    private final FinancialMetricRepository financialMetricRepository;
+    private final FinancialMetricRepository metricRepository;
     private final FinancialMetricHistoryRepository historyRepository;
 
     @Override
@@ -93,7 +93,7 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
 
     private FinancialMetricEntity getOrCreateFinancialMetricEntity(FinancialMetricItem item) {
         Optional<FinancialMetricEntity> entity =
-                financialMetricRepository.findByAppNameAndCompanyId(
+                metricRepository.findByAppNameAndCompanyId(
                         item.getAppName(),
                         item.getCompanyId()
                 );

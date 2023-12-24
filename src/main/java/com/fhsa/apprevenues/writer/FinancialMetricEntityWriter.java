@@ -1,7 +1,6 @@
 package com.fhsa.apprevenues.writer;
 
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
-import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -11,7 +10,7 @@ import org.springframework.batch.item.ItemWriter;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class FinancialMetricItemWriter implements ItemWriter<FinancialMetricEntity> {
+public class FinancialMetricEntityWriter implements ItemWriter<FinancialMetricEntity> {
 
     private final FinancialMetricRepository financialMetricRepository;
 

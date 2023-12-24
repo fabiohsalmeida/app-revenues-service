@@ -1,13 +1,13 @@
 package com.fhsa.apprevenues.config;
 
 import com.fhsa.apprevenues.processor.CompanyItemProcessor;
+import com.fhsa.apprevenues.processor.EvaluateCreditRiskProcessor;
 import com.fhsa.apprevenues.processor.FinancialMetricItemProcessor;
-import com.fhsa.apprevenues.reader.CompanyItemReader;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricRepository;
 import com.fhsa.apprevenues.writer.CompanyItemWriter;
-import com.fhsa.apprevenues.writer.FinancialMetricItemWriter;
+import com.fhsa.apprevenues.writer.FinancialMetricEntityWriter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 public class StepScopedConfiguration {
 
     public final CompanyRepository companyRepository;
-    public final FinancialMetricRepository financialMetricRepository;
-    private final FinancialMetricHistoryRepository financialMetricHistoryRepository;
+    public final FinancialMetricRepository metricRepository;
+    private final FinancialMetricHistoryRepository metricHistoryRepository;
 
     @Bean
     @StepScope
@@ -37,16 +37,25 @@ public class StepScopedConfiguration {
     @StepScope
     public FinancialMetricItemProcessor financialMetricItemProcessor() {
         return new FinancialMetricItemProcessor(
-            financialMetricRepository,
-            financialMetricHistoryRepository
+                metricRepository,
+                metricHistoryRepository
         );
     }
 
     @Bean
     @StepScope
-    public FinancialMetricItemWriter financialMetricItemWriter() {
-        return new FinancialMetricItemWriter(
-            financialMetricRepository
+    public FinancialMetricEntityWriter financialMetricItemWriter() {
+        return new FinancialMetricEntityWriter(
+                metricRepository
+        );
+    }
+
+    @Bean
+    @StepScope
+    public EvaluateCreditRiskProcessor evaluateCreditRiskProcessor() {
+        return new EvaluateCreditRiskProcessor(
+                metricRepository,
+                metricHistoryRepository
         );
     }
 }

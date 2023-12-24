@@ -33,15 +33,17 @@ public class BatchConfig {
 
     @Bean
     public Job evaluateAppCreditRisks(
+        JobRepository jobRepository,
         Step processNewCompanies,
         Step processFinancialMetrics,
-        JobRepository jobRepository
+        Step evaluateCreditRisk
     ) {
         String jobName = "Process new companies and evaluate app credit risks";
 
         return new JobBuilder(jobName, jobRepository)
                 .start(processNewCompanies)
                 .next(processFinancialMetrics)
+                .next(evaluateCreditRisk)
                 .build();
     }
 
@@ -77,6 +79,26 @@ public class BatchConfig {
 
         return new StepBuilder(name, jobRepository).<FinancialMetricItem, FinancialMetricEntity>
                 chunk(completionPolicy(1), batchTransactionManager())
+                .transactionManager(transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .faultTolerant()
+                .build();
+    }
+
+    @Bean
+    public Step evaluateCreditRisk(
+        ItemReader<FinancialMetricEntity> reader,
+        ItemProcessor<FinancialMetricEntity, FinancialMetricEntity> processor,
+        ItemWriter<FinancialMetricEntity> writer,
+        PlatformTransactionManager transactionManager,
+        JobRepository jobRepository
+    ) {
+        String name = "Read from database non evaluated financial metrics and evaluate them";
+
+        return new StepBuilder(name, jobRepository).<FinancialMetricEntity, FinancialMetricEntity>
+                chunk(completionPolicy(20), batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)
                 .processor(processor)
