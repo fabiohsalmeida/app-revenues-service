@@ -4,6 +4,7 @@ import com.fhsa.apprevenues.domain.entity.CompanyEntity;
 import com.fhsa.apprevenues.domain.item.CompanyItem;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.batch.item.ItemProcessor;
 
 import java.util.Optional;
@@ -16,7 +17,8 @@ public class CompanyItemProcessor implements ItemProcessor<CompanyItem, CompanyE
     private final CompanyRepository repository;
 
     @Override
-    public CompanyEntity process(CompanyItem companyItem) throws Exception {
+    @SneakyThrows
+    public CompanyEntity process(CompanyItem companyItem) {
         return isItemIdAlreadyInUse(companyItem) ? null : new CompanyEntity(
             companyItem.getId(),
             companyItem.getName(),

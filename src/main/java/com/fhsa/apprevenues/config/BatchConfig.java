@@ -2,6 +2,7 @@ package com.fhsa.apprevenues.config;
 
 import com.fhsa.apprevenues.domain.entity.CompanyEntity;
 import com.fhsa.apprevenues.domain.item.CompanyItem;
+import com.fhsa.apprevenues.domain.item.FinancialMetricItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -30,11 +31,16 @@ public class BatchConfig {
     private final DataSource dataSource;
 
     @Bean
-    public Job processAppCompanies(Step processNewCompanies, JobRepository jobRepository) {
-        String jobName = "Process App Companies";
+    public Job evaluateAppCreditRisks(
+        Step processNewCompanies,
+        Step processFinancialMetrics,
+        JobRepository jobRepository
+    ) {
+        String jobName = "Process new companies and evaluate app credit risks";
 
         return new JobBuilder(jobName, jobRepository)
                 .start(processNewCompanies)
+                .next(processFinancialMetrics)
                 .build();
     }
 
@@ -49,6 +55,26 @@ public class BatchConfig {
         String name = "Read from CSV and check if there's new companies to be processed";
 
         return new StepBuilder(name, jobRepository).<CompanyItem, CompanyEntity>
+                chunk(completionPolicy(), batchTransactionManager())
+                .transactionManager(transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .faultTolerant()
+                .build();
+    }
+
+    @Bean
+    public Step processFinancialMetrics(
+        ItemReader<FinancialMetricItem> reader,
+        ItemProcessor<FinancialMetricItem, FinancialMetricItem> processor,
+        ItemWriter<FinancialMetricItem> writer,
+        PlatformTransactionManager transactionManager,
+        JobRepository jobRepository
+    ) {
+        String name = "Read from CSV and update financial metrics to database";
+
+        return new StepBuilder(name, jobRepository).<FinancialMetricItem, FinancialMetricItem>
                 chunk(completionPolicy(), batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)

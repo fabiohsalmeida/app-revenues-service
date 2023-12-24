@@ -9,6 +9,7 @@ import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,10 @@ public class CompanyItemReader {
     @Value("classpath:input/app-companies.csv")
     private Resource input;
 
-    @Bean
     @StepScope
-    public FlatFileItemReader<CompanyItem> flatFileItemReader(
-            LineMapper<CompanyItem> lineMapper
+    @Bean
+    public FlatFileItemReader<CompanyItem> companyItemFlatFileItemReader(
+        LineMapper<CompanyItem> lineMapper
     ) {
         FlatFileItemReader<CompanyItem> companyFileReader = new FlatFileItemReader<>();
 
@@ -37,7 +38,7 @@ public class CompanyItemReader {
 
     @Bean
     public DefaultLineMapper<CompanyItem> companyLineMapper(
-            LineTokenizer tokenizer,
+            @Qualifier("companyLineTokenizer") LineTokenizer tokenizer,
             FieldSetMapper<CompanyItem> fieldSetMapper
     ) {
         DefaultLineMapper<CompanyItem> lineMapper = new DefaultLineMapper<>();
