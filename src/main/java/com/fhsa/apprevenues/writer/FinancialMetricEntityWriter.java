@@ -19,8 +19,6 @@ public class FinancialMetricEntityWriter implements ItemWriter<FinancialMetricEn
     public void write(Chunk<? extends FinancialMetricEntity> chunk) {
         List<FinancialMetricEntity> items = (List<FinancialMetricEntity>) chunk.getItems();
 
-        FinancialMetricEntity entity = items.stream().findFirst().get();
-
-        financialMetricRepository.save(entity);
+        financialMetricRepository.saveAll(items);
     }
 }

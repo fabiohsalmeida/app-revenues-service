@@ -8,8 +8,8 @@ CREATE TABLE financial_metrics(
   revenue_at_time_of_marketing_spend float8,
   marketing_spend_day int,
   payback_period int,
-  ltv_cac_ratio int,
-  risk_score int,
+  ltv_cac_ratio float8,
+  risk_score float8,
   risk_rating varchar(15),
   is_evaluation_finished bool,
   CONSTRAINT fk_company_financial_metrics

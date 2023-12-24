@@ -48,11 +48,11 @@ public class FinancialMetricEntity {
 
     @Setter
     @Column
-    private Integer ltvCacRatio;
+    private BigDecimal ltvCacRatio;
 
     @Setter
     @Column
-    private Integer riskScore;
+    private BigDecimal riskScore;
 
     @Setter
     @Column

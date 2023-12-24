@@ -1,5 +1,8 @@
 package com.fhsa.apprevenues.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum RiskRatingEnum {
     UNDOUBTED("Undoubted"),
     LOW("Low"),
