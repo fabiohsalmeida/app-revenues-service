@@ -4,6 +4,8 @@ import com.fhsa.apprevenues.processor.CompanyItemProcessor;
 import com.fhsa.apprevenues.processor.FinancialMetricItemProcessor;
 import com.fhsa.apprevenues.reader.CompanyItemReader;
 import com.fhsa.apprevenues.repository.CompanyRepository;
+import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
+import com.fhsa.apprevenues.repository.FinancialMetricRepository;
 import com.fhsa.apprevenues.writer.CompanyItemWriter;
 import com.fhsa.apprevenues.writer.FinancialMetricItemWriter;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 public class StepScopedConfiguration {
 
     public final CompanyRepository companyRepository;
+    public final FinancialMetricRepository financialMetricRepository;
+    private final FinancialMetricHistoryRepository financialMetricHistoryRepository;
 
     @Bean
     @StepScope
@@ -32,12 +36,17 @@ public class StepScopedConfiguration {
     @Bean
     @StepScope
     public FinancialMetricItemProcessor financialMetricItemProcessor() {
-        return new FinancialMetricItemProcessor();
+        return new FinancialMetricItemProcessor(
+            financialMetricRepository,
+            financialMetricHistoryRepository
+        );
     }
 
     @Bean
     @StepScope
     public FinancialMetricItemWriter financialMetricItemWriter() {
-        return new FinancialMetricItemWriter();
+        return new FinancialMetricItemWriter(
+            financialMetricRepository
+        );
     }
 }

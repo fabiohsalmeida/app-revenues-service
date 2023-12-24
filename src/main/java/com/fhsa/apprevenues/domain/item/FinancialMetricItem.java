@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -16,6 +16,6 @@ public class FinancialMetricItem {
     private String date;
     private String appName;
     private Integer companyId;
-    private Float revenue;
-    private Float marketingSpend;
+    private BigDecimal revenue;
+    private BigDecimal marketingSpend;
 }

@@ -1,11 +1,7 @@
 package com.fhsa.apprevenues.domain.entity;
 
-import com.fhsa.apprevenues.domain.enums.RiskRatingEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -22,35 +18,44 @@ public class FinancialMetricEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private String date;
-
-    @Column(nullable = false)
     private String appName;
 
     @Column(nullable = false)
     private Integer companyId;
 
+    @Setter
     @Column(nullable = false)
     private BigDecimal totalRevenue;
 
+    @Setter
     @Column
-    private BigDecimal marketSpending;
+    private BigDecimal marketingSpend;
 
+    @Setter
     @Column
-    private BigDecimal revenueAtTimeOfMarketingSpending;
+    private BigDecimal revenueAtTimeOfMarketingSpend;
 
+    @Setter
+    @Column
+    private Integer marketingSpendDay;
+
+    @Setter
     @Column
     private Integer paybackPeriod;
 
+    @Setter
     @Column
     private Integer ltvCacRatio;
 
+    @Setter
     @Column
     private Integer riskScore;
 
+    @Setter
     @Column
     private String riskRating;
 
+    @Setter
     @Column
     private Boolean isEvaluationFinished;
 }
