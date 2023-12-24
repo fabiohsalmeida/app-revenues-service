@@ -46,6 +46,7 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
     private void saveFinancialMetricHistory(FinancialMetricItem item) {
         FinancialMetricHistoryEntity entity = FinancialMetricHistoryEntity.builder()
                 .date(item.getDate())
+                .yearMonth(getYearMonth(item.getDate()))
                 .appName(item.getAppName())
                 .companyId(item.getCompanyId())
                 .revenue(item.getRevenue())
@@ -55,7 +56,7 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
         historyRepository.save(entity);
     }
 
-    private static BigDecimal getMarketingSpend(FinancialMetricItem item) {
+    private BigDecimal getMarketingSpend(FinancialMetricItem item) {
         return item.getMarketingSpend() != null ? item.getMarketingSpend() : BigDecimal.ZERO;
     }
 
@@ -103,11 +104,16 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
 
     private FinancialMetricEntity createNewFinancialMetricEntity(FinancialMetricItem item) {
         return FinancialMetricEntity.builder()
+                .yearMonth(getYearMonth(item.getDate()))
                 .appName(item.getAppName())
                 .companyId(item.getCompanyId())
                 .totalRevenue(BigDecimal.ZERO)
                 .marketingSpend(BigDecimal.ZERO)
                 .isEvaluationFinished(Boolean.FALSE)
                 .build();
+    }
+
+    private String getYearMonth(String date) {
+        return date.substring(0, 7);
     }
 }

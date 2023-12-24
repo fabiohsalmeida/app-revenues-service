@@ -24,6 +24,9 @@ public class FinancialMetricHistoryEntity {
     private String date;
 
     @Column(nullable = false)
+    private String yearMonth;
+
+    @Column(nullable = false)
     private String appName;
 
     @Column(nullable = false)

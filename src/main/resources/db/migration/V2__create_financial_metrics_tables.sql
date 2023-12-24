@@ -1,5 +1,6 @@
 CREATE TABLE financial_metrics(
   id serial PRIMARY KEY,
+  year_month varchar(7) NOT NULL,
   app_name varchar(50) NOT NULL,
   company_id serial NOT NULL,
   total_revenue float8 NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE financial_metrics(
 CREATE TABLE financial_metrics_history(
   id serial PRIMARY KEY,
   date varchar(10) NOT NULL,
+  year_month varchar(7) NOT NULL,
   app_name varchar(50) NOT NULL,
   company_id serial NOT NULL,
   revenue float8 NOT NULL,

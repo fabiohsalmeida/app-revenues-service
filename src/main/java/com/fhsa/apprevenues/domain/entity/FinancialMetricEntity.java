@@ -18,6 +18,9 @@ public class FinancialMetricEntity {
     private Integer id;
 
     @Column(nullable = false)
+    private String yearMonth;
+
+    @Column(nullable = false)
     private String appName;
 
     @Column(nullable = false)
