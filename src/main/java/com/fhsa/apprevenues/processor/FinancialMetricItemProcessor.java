@@ -2,11 +2,9 @@ package com.fhsa.apprevenues.processor;
 
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
 import com.fhsa.apprevenues.domain.entity.FinancialMetricHistoryEntity;
-import com.fhsa.apprevenues.domain.entity.FinancialMonthEntity;
 import com.fhsa.apprevenues.domain.item.FinancialMetricItem;
 import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricRepository;
-import com.fhsa.apprevenues.repository.FinancialMonthRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.batch.item.ItemProcessor;
@@ -19,7 +17,6 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
 
     private final FinancialMetricRepository metricRepository;
     private final FinancialMetricHistoryRepository historyRepository;
-    private final FinancialMonthRepository monthRepository;
 
     @Override
     @SneakyThrows
@@ -42,22 +39,8 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
 
     private FinancialMetricEntity saveHistoryAndGetFixedMetricEntity(FinancialMetricItem item) {
         saveFinancialMetricHistory(item);
-        saveIfNecessaryFinancialMonth(getYearMonth(item.getDate()));
 
         return getSetedFinancialMetricEntity(item);
-    }
-
-    private void saveIfNecessaryFinancialMonth(String yearMonth) {
-        Optional<FinancialMonthEntity> entity = monthRepository.findByYearMonth(yearMonth);
-
-        if (entity.isEmpty()) {
-            FinancialMonthEntity entityToBeStored = FinancialMonthEntity.builder()
-                .yearMonth(yearMonth)
-                .isProcessed(Boolean.FALSE)
-                .build();
-
-            monthRepository.save(entityToBeStored);
-        }
     }
 
     private void saveFinancialMetricHistory(FinancialMetricItem item) {
@@ -127,6 +110,7 @@ public class FinancialMetricItemProcessor implements ItemProcessor<FinancialMetr
                 .totalRevenue(BigDecimal.ZERO)
                 .marketingSpend(BigDecimal.ZERO)
                 .isEvaluationFinished(Boolean.FALSE)
+                .isAlreadyExported(Boolean.FALSE)
                 .build();
     }
 

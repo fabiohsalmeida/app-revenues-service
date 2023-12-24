@@ -3,6 +3,7 @@ package com.fhsa.apprevenues.batch;
 import com.fhsa.apprevenues.domain.entity.CompanyEntity;
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
 import com.fhsa.apprevenues.domain.item.CompanyItem;
+import com.fhsa.apprevenues.domain.item.EvaluatedRiskScoreAppCompanyItem;
 import com.fhsa.apprevenues.domain.item.FinancialMetricItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -17,12 +18,14 @@ import org.springframework.batch.repeat.CompletionPolicy;
 import org.springframework.batch.repeat.policy.CompositeCompletionPolicy;
 import org.springframework.batch.repeat.policy.SimpleCompletionPolicy;
 import org.springframework.batch.repeat.policy.TimeoutTerminationPolicy;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -35,7 +38,8 @@ public class BatchConfig {
         JobRepository jobRepository,
         Step processNewCompanies,
         Step processFinancialMetrics,
-        Step evaluateCreditRisk
+        Step evaluateCreditRisk,
+        Step exportUnprocessedMonths
     ) {
         String jobName = "Process new companies and evaluate app credit risks";
 
@@ -43,6 +47,7 @@ public class BatchConfig {
                 .start(processNewCompanies)
                 .next(processFinancialMetrics)
                 .next(evaluateCreditRisk)
+                .next(exportUnprocessedMonths)
                 .build();
     }
 
@@ -88,7 +93,7 @@ public class BatchConfig {
 
     @Bean
     public Step evaluateCreditRisk(
-        ItemReader<FinancialMetricEntity> reader,
+        @Qualifier("repositoryFinancialMetricEntityReader") ItemReader<FinancialMetricEntity> reader,
         ItemProcessor<FinancialMetricEntity, FinancialMetricEntity> processor,
         ItemWriter<FinancialMetricEntity> writer,
         PlatformTransactionManager transactionManager,
@@ -98,6 +103,26 @@ public class BatchConfig {
 
         return new StepBuilder(name, jobRepository).<FinancialMetricEntity, FinancialMetricEntity>
                 chunk(completionPolicy(20), batchTransactionManager())
+                .transactionManager(transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .faultTolerant()
+                .build();
+    }
+
+    @Bean
+    public Step exportUnprocessedMonths(
+            @Qualifier("repositoryToBeExportedMetricsReader") ItemReader<FinancialMetricEntity> reader,
+            ItemProcessor<FinancialMetricEntity, EvaluatedRiskScoreAppCompanyItem> processor,
+            ItemWriter<EvaluatedRiskScoreAppCompanyItem> writer,
+            PlatformTransactionManager transactionManager,
+            JobRepository jobRepository
+    ) {
+        String name = "Check if there months to be processed, if so process it";
+
+        return new StepBuilder(name, jobRepository).<FinancialMetricEntity, EvaluatedRiskScoreAppCompanyItem>
+                chunk(1, batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)
                 .processor(processor)

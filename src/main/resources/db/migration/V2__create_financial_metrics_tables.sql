@@ -12,6 +12,7 @@ CREATE TABLE financial_metrics(
   risk_score float8,
   risk_rating varchar(15),
   is_evaluation_finished bool,
+  is_already_exported bool,
   CONSTRAINT fk_company_financial_metrics
     FOREIGN KEY(company_id)
       REFERENCES app_companies(id)

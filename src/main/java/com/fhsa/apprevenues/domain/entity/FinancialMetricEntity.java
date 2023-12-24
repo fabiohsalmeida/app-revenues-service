@@ -61,4 +61,8 @@ public class FinancialMetricEntity {
     @Setter
     @Column
     private Boolean isEvaluationFinished;
+
+    @Setter
+    @Column
+    private Boolean isAlreadyExported;
 }

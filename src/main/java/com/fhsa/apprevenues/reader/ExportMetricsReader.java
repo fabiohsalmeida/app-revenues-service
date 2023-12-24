@@ -14,17 +14,17 @@ import static com.fhsa.apprevenues.util.ReaderUtils.buildDefaultSort;
 
 @Configuration
 @RequiredArgsConstructor
-public class EvaluateCreditRiskReader {
+public class ExportMetricsReader {
 
-    private final FinancialMetricRepository financialMetricRepository;
+    private final FinancialMetricRepository metricRepository;
 
     @Bean
-    public ItemReader<FinancialMetricEntity> repositoryFinancialMetricEntityReader() {
+    public ItemReader<FinancialMetricEntity> repositoryToBeExportedMetricsReader() {
         RepositoryItemReader<FinancialMetricEntity> reader = new RepositoryItemReader<>();
 
-        reader.setName("financialMetricEntityReader");
-        reader.setRepository(financialMetricRepository);
-        reader.setMethodName("findByIsEvaluationFinished");
+        reader.setName("toBeExportedMetricsReader");
+        reader.setRepository(metricRepository);
+        reader.setMethodName("findByIsAlreadyExported");
         reader.setArguments(Collections.singletonList(Boolean.FALSE));
         reader.setPageSize(20);
         reader.setSort(buildDefaultSort());
