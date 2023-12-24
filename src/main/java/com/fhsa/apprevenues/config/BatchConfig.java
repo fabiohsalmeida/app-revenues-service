@@ -1,6 +1,7 @@
 package com.fhsa.apprevenues.config;
 
 import com.fhsa.apprevenues.domain.entity.CompanyEntity;
+import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
 import com.fhsa.apprevenues.domain.item.CompanyItem;
 import com.fhsa.apprevenues.domain.item.FinancialMetricItem;
 import lombok.RequiredArgsConstructor;
@@ -67,14 +68,14 @@ public class BatchConfig {
     @Bean
     public Step processFinancialMetrics(
         ItemReader<FinancialMetricItem> reader,
-        ItemProcessor<FinancialMetricItem, FinancialMetricItem> processor,
-        ItemWriter<FinancialMetricItem> writer,
+        ItemProcessor<FinancialMetricItem, FinancialMetricEntity> processor,
+        ItemWriter<FinancialMetricEntity> writer,
         PlatformTransactionManager transactionManager,
         JobRepository jobRepository
     ) {
         String name = "Read from CSV and update financial metrics to database";
 
-        return new StepBuilder(name, jobRepository).<FinancialMetricItem, FinancialMetricItem>
+        return new StepBuilder(name, jobRepository).<FinancialMetricItem, FinancialMetricEntity>
                 chunk(completionPolicy(1), batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)
