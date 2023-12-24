@@ -1,4 +1,4 @@
-package com.fhsa.apprevenues.config;
+package com.fhsa.apprevenues.batch;
 
 import com.fhsa.apprevenues.domain.entity.CompanyEntity;
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
@@ -19,7 +19,6 @@ import org.springframework.batch.repeat.policy.SimpleCompletionPolicy;
 import org.springframework.batch.repeat.policy.TimeoutTerminationPolicy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 

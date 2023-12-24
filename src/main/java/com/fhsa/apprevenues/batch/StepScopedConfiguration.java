@@ -1,4 +1,4 @@
-package com.fhsa.apprevenues.config;
+package com.fhsa.apprevenues.batch;
 
 import com.fhsa.apprevenues.processor.CompanyItemProcessor;
 import com.fhsa.apprevenues.processor.EvaluateCreditRiskProcessor;
@@ -6,6 +6,7 @@ import com.fhsa.apprevenues.processor.FinancialMetricItemProcessor;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricRepository;
+import com.fhsa.apprevenues.repository.FinancialMonthRepository;
 import com.fhsa.apprevenues.writer.CompanyItemWriter;
 import com.fhsa.apprevenues.writer.FinancialMetricEntityWriter;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,10 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class StepScopedConfiguration {
 
-    public final CompanyRepository companyRepository;
-    public final FinancialMetricRepository metricRepository;
+    private final CompanyRepository companyRepository;
+    private final FinancialMetricRepository metricRepository;
     private final FinancialMetricHistoryRepository metricHistoryRepository;
+    private final FinancialMonthRepository monthRepository;
 
     @Bean
     @StepScope
@@ -38,7 +40,8 @@ public class StepScopedConfiguration {
     public FinancialMetricItemProcessor financialMetricItemProcessor() {
         return new FinancialMetricItemProcessor(
                 metricRepository,
-                metricHistoryRepository
+                metricHistoryRepository,
+                monthRepository
         );
     }
 
