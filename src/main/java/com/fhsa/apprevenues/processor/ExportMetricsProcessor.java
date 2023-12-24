@@ -18,6 +18,8 @@ public class ExportMetricsProcessor implements
     @Override
     @SneakyThrows
     public EvaluatedRiskScoreAppCompanyItem process(FinancialMetricEntity entity) {
+        updateIsExportedField(entity);
+
         return EvaluatedRiskScoreAppCompanyItem.builder()
             .companyId(entity.getCompanyId())
             .companyName(getCompanyName(entity))
@@ -25,6 +27,12 @@ public class ExportMetricsProcessor implements
             .riskScore(entity.getRiskScore().intValue())
             .riskRating(entity.getRiskRating())
             .build();
+    }
+
+    private void updateIsExportedField(FinancialMetricEntity entity) {
+        entity.setIsAlreadyExported(Boolean.TRUE);
+
+        metricRepository.save(entity);
     }
 
     private String getCompanyName(FinancialMetricEntity entity) {
