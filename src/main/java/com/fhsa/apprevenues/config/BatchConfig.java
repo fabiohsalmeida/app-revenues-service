@@ -55,7 +55,7 @@ public class BatchConfig {
         String name = "Read from CSV and check if there's new companies to be processed";
 
         return new StepBuilder(name, jobRepository).<CompanyItem, CompanyEntity>
-                chunk(completionPolicy(), batchTransactionManager())
+                chunk(completionPolicy(10), batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)
                 .processor(processor)
@@ -75,7 +75,7 @@ public class BatchConfig {
         String name = "Read from CSV and update financial metrics to database";
 
         return new StepBuilder(name, jobRepository).<FinancialMetricItem, FinancialMetricItem>
-                chunk(completionPolicy(), batchTransactionManager())
+                chunk(completionPolicy(1), batchTransactionManager())
                 .transactionManager(transactionManager)
                 .reader(reader)
                 .processor(processor)
@@ -84,14 +84,13 @@ public class BatchConfig {
                 .build();
     }
 
-    @Bean
-    public CompletionPolicy completionPolicy() {
+    public CompletionPolicy completionPolicy(Integer chunkSize) {
         CompositeCompletionPolicy policy = new CompositeCompletionPolicy();
 
         policy.setPolicies(
             new CompletionPolicy[] {
                 new TimeoutTerminationPolicy(1000),
-                new SimpleCompletionPolicy(10)}
+                new SimpleCompletionPolicy(chunkSize)}
         );
 
         return policy;
