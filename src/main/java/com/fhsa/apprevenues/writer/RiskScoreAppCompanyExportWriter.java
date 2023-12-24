@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Configuration
 @RequiredArgsConstructor
 public class RiskScoreAppCompanyExportWriter {
@@ -20,7 +23,7 @@ public class RiskScoreAppCompanyExportWriter {
     public FlatFileItemWriter<EvaluatedRiskScoreAppCompanyItem> writer() {
         FlatFileItemWriter<EvaluatedRiskScoreAppCompanyItem> writer = new FlatFileItemWriter<>();
 
-        writer.setResource(new FileSystemResource("output/app-credit-risk-ratings.csv"));
+        writer.setResource(new FileSystemResource(filename()));
         writer.setAppendAllowed(true);
         writer.setLineAggregator(lineAggregator());
         writer.setHeaderCallback(headerCallback());
@@ -57,5 +60,13 @@ public class RiskScoreAppCompanyExportWriter {
             "riskScore",
             "riskRating"
         };
+    }
+
+    private String filename() {
+        LocalDateTime current = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+        String formattedDateTime = current.format(format);
+
+        return "output/app-credit-risk-ratings_"+formattedDateTime+".csv";
     }
 }
