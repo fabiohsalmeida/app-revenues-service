@@ -59,6 +59,20 @@ public class FinancialMetricEntityMother {
             .build();
     }
 
+    public static FinancialMetricEntity readyToBeEvaluatedMetricEntity(
+        BigDecimal totalRevenue,
+        BigDecimal marketingSpend,
+        Integer paybackPeriod
+    ) {
+        return presetBuilder()
+            .totalRevenue(totalRevenue)
+            .marketingSpend(marketingSpend)
+            .marketingSpendDay(DEFAULT_MARKETING_SPEND_DAY)
+            .revenueAtTimeOfMarketingSpend(DEFAULT_REVENUE_AT_TIME_OF_MARKETING_SPEND)
+            .paybackPeriod(paybackPeriod)
+            .build();
+    }
+
     private static FinancialMetricEntityBuilder presetBuilder() {
         return FinancialMetricEntity.builder()
             .id(DEFAULT_ID)
