@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @Configuration
 public class FinancialMetricItemReader {
 
-    @Value("classpath:input/app-financial-metrics.csv")
+    @Value("classpath:input/metric/app-financial-metrics.csv")
     private Resource input;
 
     @StepScope
