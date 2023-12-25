@@ -9,12 +9,6 @@ Those are the tools needed to run the project:
 
 *>It's highly suggested to use IntelliJ as an IDE since it's going to abstract the need to install Java and Maven, making it necessary to just download and install Docker.*
 
-## Set up before starting service
-Before starting service, you have to:
-* Paste your app-financial-metrics entries inside the file in /src/main/resources/input/metric/app-financial-metrics.csv
-
-*sorry for that*
-
 ## Starting service
 This service uses Spring Boot Docker Compose, so once it starts to boot, it'll also build all the necessary containers to do that. Follow those commands to start the project:
 
@@ -26,10 +20,13 @@ If you want to force the dependency downloads, run the same command with the ``-
 
 After the service is booted, a new folder will be created in the root project:
 * input/company
+* input/metric
 
-In order to start the job, you'll need to move a csv file with the app companies to /input/company It doesn't need to have any particular name, just be a *.csv in the right format.
+There are two jobs inside this project, here it's how to run them:
+With service running, in order to start the job that includes new companies to database, you'll need to move a csv file with the app companies to /input/company It doesn't need to have any particular name, just be a *.csv in the right format. That job just include new companies to database.
+With service running, in order to start the job that read and evaluate new financial metrics, you'll need to move a csv file with the financial metrics to /input/metric it doesn't need to have any particular name, just be a *.csv in the right format. That job will generate a output file.
 
-After running the project, a new folder will be created in the root project:
+After putting a new metric file to /input/metric, a new folder will be created in the root project:
 * output/
 
 Inside of it, you will find the result of processing, described through the technical challenge.
@@ -39,25 +36,27 @@ Inside of it, you will find the result of processing, described through the tech
 *>There's no need to use `docker-compose up`, since the project is using **spring-boot-docker-compose**.*
 
 ## How to run the project with new Financial Metrics to be processed
-I was not able to fix it in time, so the financial metrics file is not using dynamic processing, making it impossible to load a new file once the service is already running.
+Just keep adding new files to be processed, if there's new companies add to the input/company folder, if there's new financial metrics to be processed and evaluate add to input/metric folder.
 
->In order to rerun the project, you need to stop the process, do the *Set up before starting service* and after *Starting service* again.
-
-*sorry for that once more*
+*Both cases are requiring a .csv file.*
 
 ## Next steps
 Those are my next steps, if I had time:
+* Don't rely on file metric file being sort;
 * Include fault tolerance policies while writing files;
-* Create an end-to-end job test with dynamic files created just for it and deleted after the test runs.
-* Separate into two jobs, one responsible only for including new companies and another for processing and evaluating financial metrics; that way, I could create two job launchers with dynamic files.
-* Making both jobs (described above) run with JobLauncher through dynamic file input into the folder;
+* Include reprocessing policies;
+* Create an end-to-end job test with dynamic files created just for it and deleted after the test runs;
 * Delete files already processed;
 * Better organize the code;
-* Create unitary tests for readers and writers too.
+* Create unitary tests for readers and writers too;
 * Create dynamic variables for constants like coefficients used for ltvCacRadio and paybackPeriod;
 * Create a message bundle with at least default language;
-* Include tons of loggers for each part of each step;
 * Improve the README file with some architecture and DB images.
+
+Steps done since v1:
+* [**DONE**] Separate into two jobs, one responsible only for including new companies and another for processing and evaluating financial metrics; that way, I could create two job launchers with dynamic files.
+* [**DONE**] Making both jobs (described above) run with JobLauncher through dynamic file input into the folder;
+
 
 ## Project Structure
 This is the project structure used in the project, and its insights and explanations are divided into packages:

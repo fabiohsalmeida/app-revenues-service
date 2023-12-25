@@ -2,8 +2,8 @@ package com.fhsa.apprevenues.batch;
 
 import com.fhsa.apprevenues.processor.CompanyItemProcessor;
 import com.fhsa.apprevenues.processor.EvaluateCreditRiskProcessor;
-import com.fhsa.apprevenues.processor.FinancialMetricItemProcessor;
 import com.fhsa.apprevenues.processor.ExportMetricsProcessor;
+import com.fhsa.apprevenues.processor.FinancialMetricItemProcessor;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
 import com.fhsa.apprevenues.repository.FinancialMetricRepository;
@@ -54,10 +54,7 @@ public class StepScopedConfiguration {
     @Bean
     @StepScope
     public EvaluateCreditRiskProcessor evaluateCreditRiskProcessor() {
-        return new EvaluateCreditRiskProcessor(
-            metricRepository,
-            metricHistoryRepository
-        );
+        return new EvaluateCreditRiskProcessor();
     }
 
     @Bean

@@ -2,16 +2,12 @@ package com.fhsa.apprevenues.processor;
 
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
 import com.fhsa.apprevenues.domain.enums.RiskRatingEnum;
-import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
-import com.fhsa.apprevenues.repository.FinancialMetricRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
@@ -32,12 +28,6 @@ public class EvaluateCreditRiskProcessorTest {
 
     @InjectMocks
     private EvaluateCreditRiskProcessor processor;
-
-    @Mock
-    private FinancialMetricRepository metricRepository;
-
-    @Mock
-    private FinancialMetricHistoryRepository historyRepository;
 
     @ParameterizedTest
     @ValueSource(strings = {"350000", "270000", "245000", "195000", "120000"})

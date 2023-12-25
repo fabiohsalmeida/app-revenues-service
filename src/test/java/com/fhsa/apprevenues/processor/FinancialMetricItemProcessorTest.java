@@ -42,7 +42,7 @@ public class FinancialMetricItemProcessorTest {
 
     @Test
     void invalidStateAlreadyHasInput() {
-        FinancialMetricItem input = defaultFinancialMetricItem();
+        var input = defaultFinancialMetricItem();
         Optional<FinancialMetricHistoryEntity> mockedHistory = Optional.of(defaultFinancialMetricHistory());
 
         when(historyRepository.findByDateAndAppNameAndCompanyId(
@@ -56,13 +56,13 @@ public class FinancialMetricItemProcessorTest {
 
     @Test
     void validStateNewMetricFinancial() {
-        FinancialMetricItem input = defaultFinancialMetricItem();
+        var input = defaultFinancialMetricItem();
         Optional<FinancialMetricEntity> mockedMetric = Optional.empty();
 
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -83,14 +83,14 @@ public class FinancialMetricItemProcessorTest {
 
     @Test
     void validStateNewInputDoesntHaveMarketingSpend() {
-        FinancialMetricItem input = defaultFinancialMetricItem();
-        Optional<FinancialMetricEntity> mockedMetric =
+        var input = defaultFinancialMetricItem();
+        var mockedMetric =
                 Optional.of(entityWithoutMarketingSpend(DEFAULT_TOTAL_REVENUE));
 
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -110,7 +110,7 @@ public class FinancialMetricItemProcessorTest {
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -137,7 +137,7 @@ public class FinancialMetricItemProcessorTest {
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -162,7 +162,7 @@ public class FinancialMetricItemProcessorTest {
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -188,7 +188,7 @@ public class FinancialMetricItemProcessorTest {
         mockFinancialMetricHistory(input);
         mockFinancialMetric(input, mockedMetric);
 
-        FinancialMetricEntity response = processor.process(input);
+        var response = processor.process(input);
 
         verifyNewEntryToMetricHistory();
 
@@ -201,7 +201,7 @@ public class FinancialMetricItemProcessorTest {
     }
 
     private static void assertMetricTotalRevenueValue(FinancialMetricItem input, BigDecimal mockedMetricInitialTotalRevenue, FinancialMetricEntity response) {
-        BigDecimal expectedTotalRevenue = mockedMetricInitialTotalRevenue.add(input.getRevenue());
+        var expectedTotalRevenue = mockedMetricInitialTotalRevenue.add(input.getRevenue());
 
         assertTrue(expectedTotalRevenue.compareTo(response.getTotalRevenue())==0);
     }

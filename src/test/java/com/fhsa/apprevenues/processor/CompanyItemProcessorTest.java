@@ -1,8 +1,6 @@
 package com.fhsa.apprevenues.processor;
 
 import com.fhsa.apprevenues.domain.entity.CompanyEntity;
-import com.fhsa.apprevenues.domain.item.CompanyItem;
-import com.fhsa.apprevenues.mother.CompanyEntityMother;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,8 +28,8 @@ public class CompanyItemProcessorTest {
 
     @Test
     void invalidStateItemAlreadyInUse() {
-        Optional<CompanyEntity> mockedCompanyEntity = Optional.of(defaultCompanyEntity());
-        CompanyItem inputCompanyItem = defaultCompanyItem();
+        var mockedCompanyEntity = Optional.of(defaultCompanyEntity());
+        var inputCompanyItem = defaultCompanyItem();
 
         when(companyRepository.findById(eq(inputCompanyItem.getId()))).thenReturn(mockedCompanyEntity);
 
@@ -43,11 +41,11 @@ public class CompanyItemProcessorTest {
     @Test
     void validStateItemNotInUse() {
         Optional<CompanyEntity> mockedEntity = Optional.empty();
-        CompanyItem inputCompanyItem = defaultCompanyItem();
+        var inputCompanyItem = defaultCompanyItem();
 
         when(companyRepository.findById(eq(inputCompanyItem.getId()))).thenReturn(mockedEntity);
 
-        CompanyEntity response = processor.process(inputCompanyItem);
+        var response = processor.process(inputCompanyItem);
 
         assertNotNull(response);
         assertEquals(inputCompanyItem.getId(), response.getId());
@@ -57,15 +55,15 @@ public class CompanyItemProcessorTest {
 
     @Test
     void invalidStateDifferentItemInSameId() {
-        Optional<CompanyEntity> mockedCompanyEntity = Optional.of(defaultCompanyEntity());
-        CompanyItem inputCompanyItem = customCompanyItem(
+        var mockedCompanyEntity = Optional.of(defaultCompanyEntity());
+        var inputCompanyItem = customCompanyItem(
                 mockedCompanyEntity.get().getId(),
                 "Different Name",
                 "AZ");
 
         when(companyRepository.findById(eq(inputCompanyItem.getId()))).thenReturn(mockedCompanyEntity);
 
-        CompanyEntity response = processor.process(inputCompanyItem);
+        var response = processor.process(inputCompanyItem);
 
         assertNull(response);
     }

@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-12-25T06:22:08.220Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="wT86cPNwej4-HMHMF7-Y" version="22.1.11" type="google">
+<mxfile host="app.diagrams.net" modified="2023-12-25T13:56:46.885Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="EBpZ8KvjWdL91hVMurN3" version="22.1.11" type="google">
   <diagram name="Página-1" id="20XXsGmTUjqbx5ftWIZ8">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -14,19 +14,19 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-2" value="processFinancialMetrics" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="280" y="190" width="260" height="80" as="geometry" />
+          <mxGeometry x="30" y="600" width="260" height="80" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-3" target="32U0IOiAARlVQyEs1Njg-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-3" value="evaluateCreditRisk" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="530" y="190" width="260" height="80" as="geometry" />
+          <mxGeometry x="280" y="600" width="260" height="80" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-4" target="32U0IOiAARlVQyEs1Njg-40">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-4" value="exportUnprocessedMonths" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="780" y="190" width="260" height="80" as="geometry" />
+          <mxGeometry x="530" y="600" width="260" height="80" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-6" target="32U0IOiAARlVQyEs1Njg-8">
           <mxGeometry relative="1" as="geometry" />
@@ -50,85 +50,85 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-18" value="Read app-financial-metrics.csv&amp;nbsp; file from /src/main/resources/input/metric" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="305" width="220" height="40" as="geometry" />
+          <mxGeometry x="50" y="715" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-20" target="32U0IOiAARlVQyEs1Njg-24">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-20" value="For each register inside file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="300" y="380" width="220" height="250" as="geometry" />
+          <mxGeometry x="50" y="790" width="220" height="250" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-21" value="Manage historical to check if register was already processed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="330" y="410" width="160" height="50" as="geometry" />
+          <mxGeometry x="80" y="820" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-22" value="Filter only financial metrics that weren&#39;t processed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="330" y="470" width="160" height="40" as="geometry" />
+          <mxGeometry x="80" y="880" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-23" value="Process on marketing spend infos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="330" y="520" width="160" height="40" as="geometry" />
+          <mxGeometry x="80" y="930" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-24" value="PUT all filtered financial metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="300" y="700" width="220" height="30" as="geometry" />
+          <mxGeometry x="50" y="1110" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-27" target="32U0IOiAARlVQyEs1Njg-29">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-27" value="Read all FinancialMetricEntities from database that isProcessed is false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="550" y="305" width="220" height="40" as="geometry" />
+          <mxGeometry x="300" y="715" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-29" target="32U0IOiAARlVQyEs1Njg-37">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-29" value="For each FinancialMetricEntity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="550" y="380" width="220" height="300" as="geometry" />
+          <mxGeometry x="300" y="790" width="220" height="300" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-30" value="Calculate LTV:CAC Ratio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="410" width="160" height="30" as="geometry" />
+          <mxGeometry x="330" y="820" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-31" value="Calculate coefficient of LTV:CAC and payback period" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="450" width="160" height="40" as="geometry" />
+          <mxGeometry x="330" y="860" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-32" value="Calculate risk score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="500" width="160" height="30" as="geometry" />
+          <mxGeometry x="330" y="910" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-33" value="Evaluate risk score (risk rating comes here)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="540" width="160" height="40" as="geometry" />
+          <mxGeometry x="330" y="950" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-35" value="Set isProcessed to true" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="590" width="160" height="30" as="geometry" />
+          <mxGeometry x="330" y="1000" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-36" value="Update FinancialMetricEntity fields" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="580" y="630" width="160" height="40" as="geometry" />
+          <mxGeometry x="330" y="1040" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-37" value="UPDATE all FinancialMetricEntities" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="550" y="720" width="220" height="30" as="geometry" />
+          <mxGeometry x="300" y="1130" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-40" target="32U0IOiAARlVQyEs1Njg-43">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-40" value="Read all FinancialMetricEntities from database that isAlreadyExported is false" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="305" width="220" height="40" as="geometry" />
+          <mxGeometry x="550" y="715" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-43" target="32U0IOiAARlVQyEs1Njg-50">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-43" value="For each FinancialMetricEntity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="800" y="380" width="220" height="120" as="geometry" />
+          <mxGeometry x="550" y="790" width="220" height="120" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-45" value="Map it from FinancialMetricItem to FinancialMetricEntity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="330" y="570" width="160" height="50" as="geometry" />
+          <mxGeometry x="80" y="980" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-46" value="Map it from CompanyItem to CompanyEntity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
           <mxGeometry x="80" y="460" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-48" value="Set isAlreadyExported to true&lt;br&gt;and update entity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="830" y="410" width="160" height="40" as="geometry" />
+          <mxGeometry x="580" y="820" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-49" value="Map it from FinancialMetricEntity to EvaluatedRiskScoreAppCompanyItem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B4E2E7;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="830" y="460" width="160" height="30" as="geometry" />
+          <mxGeometry x="580" y="870" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-50" value="Write all items to output file locate in /output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="540" width="220" height="40" as="geometry" />
+          <mxGeometry x="550" y="950" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="32U0IOiAARlVQyEs1Njg-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="32U0IOiAARlVQyEs1Njg-55" target="32U0IOiAARlVQyEs1Njg-56">
           <mxGeometry relative="1" as="geometry" />
@@ -136,8 +136,17 @@
         <mxCell id="32U0IOiAARlVQyEs1Njg-55" value="jobLauncher" style="triangle;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="-60" y="190" width="100" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="32U0IOiAARlVQyEs1Njg-56" value="Job starts when a new file is insert in /input/company" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=3" vertex="1" parent="1">
+        <mxCell id="32U0IOiAARlVQyEs1Njg-56" value="Job starts when a new file csv is insert in /input/company" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=3" vertex="1" parent="1">
           <mxGeometry x="-200" y="200" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FEk80XJR-opVQE85My5Y-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;dashed=1;dashPattern=1 4;" edge="1" parent="1" source="FEk80XJR-opVQE85My5Y-35" target="FEk80XJR-opVQE85My5Y-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FEk80XJR-opVQE85My5Y-35" value="jobLauncher" style="triangle;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-60" y="600" width="100" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FEk80XJR-opVQE85My5Y-36" value="Job starts when a new file csv is insert in /input/metric" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=3" vertex="1" parent="1">
+          <mxGeometry x="-200" y="610" width="110" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

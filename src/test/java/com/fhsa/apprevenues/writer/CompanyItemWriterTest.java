@@ -1,6 +1,5 @@
 package com.fhsa.apprevenues.writer;
 
-import com.fhsa.apprevenues.domain.entity.CompanyEntity;
 import com.fhsa.apprevenues.repository.CompanyRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,8 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.batch.item.Chunk;
-
-import java.util.List;
 
 import static com.fhsa.apprevenues.mother.CompanyEntityMother.defaultCompanyEntity;
 import static org.mockito.ArgumentMatchers.any;

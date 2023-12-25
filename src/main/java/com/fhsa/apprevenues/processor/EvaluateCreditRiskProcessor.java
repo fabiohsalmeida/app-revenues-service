@@ -2,8 +2,6 @@ package com.fhsa.apprevenues.processor;
 
 import com.fhsa.apprevenues.domain.entity.FinancialMetricEntity;
 import com.fhsa.apprevenues.domain.enums.RiskRatingEnum;
-import com.fhsa.apprevenues.repository.FinancialMetricHistoryRepository;
-import com.fhsa.apprevenues.repository.FinancialMetricRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.batch.item.ItemProcessor;
@@ -16,9 +14,6 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 @RequiredArgsConstructor
 public class EvaluateCreditRiskProcessor implements ItemProcessor<FinancialMetricEntity, FinancialMetricEntity> {
-
-    private final FinancialMetricRepository metricRepository;
-    private final FinancialMetricHistoryRepository historyRepository;
 
     @Override
     @SneakyThrows

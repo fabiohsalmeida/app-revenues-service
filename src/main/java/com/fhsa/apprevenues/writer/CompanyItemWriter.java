@@ -8,7 +8,6 @@ import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public class CompanyItemWriter implements ItemWriter<CompanyEntity> {
