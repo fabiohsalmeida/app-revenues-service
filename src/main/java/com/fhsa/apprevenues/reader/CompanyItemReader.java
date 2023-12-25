@@ -13,24 +13,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 @Configuration
 public class CompanyItemReader {
 
-    @Value("classpath:input/app-companies.csv")
-    private Resource input;
+    @Value("${input.company.directory}")
+    private String inputCompanyDirectory;
 
-    @StepScope
+//    @Value("classpath:input/app-companies.csv")
+//    private Resource input;
+
     @Bean
+    @StepScope
     public FlatFileItemReader<CompanyItem> companyItemFlatFileItemReader(
+            @Value("#{jobParameters['input.file.name']}") String input,
         LineMapper<CompanyItem> lineMapper
     ) {
         FlatFileItemReader<CompanyItem> companyFileReader = new FlatFileItemReader<>();
 
         companyFileReader.setName("companyItemReader");
         companyFileReader.setLinesToSkip(1);
-        companyFileReader.setResource(input);
+        companyFileReader.setResource(new FileSystemResource(input));
         companyFileReader.setLineMapper(lineMapper);
 
         return companyFileReader;
