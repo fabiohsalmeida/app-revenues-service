@@ -13,26 +13,22 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
-
-import java.time.LocalDate;
+import org.springframework.core.io.FileSystemResource;
 
 @Configuration
 public class FinancialMetricItemReader {
 
-    @Value("classpath:input/metric/app-financial-metrics.csv")
-    private Resource input;
-
-    @StepScope
     @Bean
+    @StepScope
     public FlatFileItemReader<FinancialMetricItem> financialMetricItemFlatFileItemReader(
+        @Value("#{jobParameters['input.file.name']}") String input,
         LineMapper<FinancialMetricItem> lineMapper
     ) {
         FlatFileItemReader<FinancialMetricItem> financialMetricsReader = new FlatFileItemReader<>();
 
         financialMetricsReader.setName("financialMetricsReader");
         financialMetricsReader.setLinesToSkip(1);
-        financialMetricsReader.setResource(input);
+        financialMetricsReader.setResource(new FileSystemResource(input));
         financialMetricsReader.setLineMapper(lineMapper);
 
         return financialMetricsReader;

@@ -21,14 +21,10 @@ import org.springframework.batch.repeat.policy.TimeoutTerminationPolicy;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -36,19 +32,29 @@ public class BatchConfig {
 
     private final DataSource dataSource;
 
-    @Bean
-    public Job evaluateAppCreditRisks(
+    @Bean("evaluateAppCompanies")
+    public Job evaluateAppCompanies(
         JobRepository jobRepository,
-        Step processNewCompanies,
-        Step processFinancialMetrics,
-        Step evaluateCreditRisk,
-        Step exportUnprocessedMonths
+        Step processNewCompanies
     ) {
-        String jobName = "Process new companies and evaluate app credit risks";
+        String jobName = "Process new companies";
 
         return new JobBuilder(jobName, jobRepository)
-                .start(processNewCompanies)
-                .next(processFinancialMetrics)
+            .start(processNewCompanies)
+            .build();
+    }
+
+    @Bean("evaluateFinancialMetricsAndAppCreditRisks")
+    public Job evaluateFinancialMetricsAndAppCreditRisks(
+            JobRepository jobRepository,
+            Step processFinancialMetrics,
+            Step evaluateCreditRisk,
+            Step exportUnprocessedMonths
+    ) {
+        String jobName = "Process new financial metrics and evaluate app credit risks";
+
+        return new JobBuilder(jobName, jobRepository)
+                .start(processFinancialMetrics)
                 .next(evaluateCreditRisk)
                 .next(exportUnprocessedMonths)
                 .build();
