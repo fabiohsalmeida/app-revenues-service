@@ -9,6 +9,12 @@ Those are the tools needed to run the project:
 
 *>It's highly suggested to use IntelliJ as IDE, since it's going to abstract the needs to install Java and Maven, making necessary just to download and install docker.*
 
+## Set up before starting service
+Before starting service you have to:
+* Paste your app-financial-metrics entries inside the file in /src/main/resources/input/metric/app-financial-metrics.csv
+
+*sorry for that*
+
 ## Starting service
 This service uses Spring Boot Docker Compose, so once it starts to boot it'll also build all the necessary containers to do that. Follow those commands to start the project:
 
@@ -18,7 +24,22 @@ If you want to force the dependency downloads, run the same command with ``-U`` 
 
 ``mvn clean install -U spring-boot:run``
 
+After the service is booted, two new folders will be created in the root project:
+* input/company
+* output
+
+In order to start the job you'll need to move a csv file with the app companies to /input/company, doesn't need to have any particular name, just be a *.csv in the right format.
+
+>After the job is finished a result file will be generated into the output folder.
+
 *>There's no need to use `docker-compose up`, since the project is using **spring-boot-docker-compose**.*
+
+## How to run the project with new Financial Metrics to be processed
+I was not enable to fix it in time, so the financial metrics file is not using dynamic processing, turning impossible to load a new file once the service is already running.
+
+>In order to rerun the project, you need to stop the process, do the *Set up before starting service* and after *Starting service* again.
+
+*sorry for that once more*
 
 ## Next steps
 Those are my next steps if I had time:
