@@ -24,11 +24,15 @@ If you want to force the dependency downloads, run the same command with ``-U`` 
 
 ``mvn clean install -U spring-boot:run``
 
-After the service is booted, two new folders will be created in the root project:
+After the service is booted, a new folder will be created in the root project:
 * input/company
-* output
 
 In order to start the job you'll need to move a csv file with the app companies to /input/company, doesn't need to have any particular name, just be a *.csv in the right format.
+
+After running the project, a new folder will be created in the root project:
+* output/
+
+Inside of it you will find the result of processing, described through the technical challenge.
 
 >After the job is finished a result file will be generated into the output folder.
 
