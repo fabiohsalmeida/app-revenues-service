@@ -108,8 +108,8 @@ public class EvaluateCreditRiskProcessor implements ItemProcessor<FinancialMetri
     }
 
     private BigDecimal calculateLtvCacRatio(BigDecimal totalRevenue, BigDecimal marketingSpend) {
-        BigDecimal ltvCacRatio = totalRevenue.divide(marketingSpend, 2, HALF_EVEN);
-
-        return ltvCacRatio;
+        return BigDecimal.ZERO.compareTo(marketingSpend)==0 ?
+                BigDecimal.valueOf(5.0) :
+                totalRevenue.divide(marketingSpend, 2, HALF_EVEN);
     }
 }

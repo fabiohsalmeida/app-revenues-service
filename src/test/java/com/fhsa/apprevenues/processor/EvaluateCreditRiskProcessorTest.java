@@ -80,6 +80,7 @@ public class EvaluateCreditRiskProcessorTest {
 
     private static Stream<Arguments> provideParametersForRiskRating() {
         return Stream.of(
+            Arguments.of(BigDecimal.valueOf(500000), BigDecimal.ZERO, 10, UNDOUBTED),
             Arguments.of(BigDecimal.valueOf(500000), BigDecimal.valueOf(36159), 10, UNDOUBTED),
             Arguments.of(BigDecimal.valueOf(823902), BigDecimal.valueOf(350000), 13, LOW),
             Arguments.of(BigDecimal.valueOf(79675), BigDecimal.valueOf(40000), 15, MODERATE),

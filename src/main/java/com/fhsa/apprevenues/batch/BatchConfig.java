@@ -14,6 +14,7 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.repeat.CompletionPolicy;
 import org.springframework.batch.repeat.policy.CompositeCompletionPolicy;
 import org.springframework.batch.repeat.policy.SimpleCompletionPolicy;
@@ -77,6 +78,8 @@ public class BatchConfig {
                 .processor(processor)
                 .writer(writer)
                 .faultTolerant()
+                .skipLimit(10)
+                .skip(FlatFileParseException.class)
                 .build();
     }
 
@@ -97,6 +100,8 @@ public class BatchConfig {
                 .processor(processor)
                 .writer(writer)
                 .faultTolerant()
+                .skipLimit(10)
+                .skip(FlatFileParseException.class)
                 .build();
     }
 
